@@ -1,0 +1,51 @@
+<template lang="jade">
+div
+  f7-view
+    f7-page(name="navbar", navbar-type="fixed", toolbar-type="fixed", transition="fade")
+      f7-navbar
+        span(f7-back, slot="left") back
+        span(slot="center") Contancts List
+      f7-page-content(contacts)
+        f7-list-block
+          f7-list-group(title="A")
+            f7-list-item
+              f7-list-content(title="Aaron")
+            f7-list-item
+              f7-list-content(title="Abbie")
+            f7-list-item
+              f7-list-content(title="Adam")
+            f7-list-item
+              f7-list-content(title="Adele")
+            f7-list-item
+              f7-list-content(title="Abbie")
+            f7-list-item
+              f7-list-content(title="Adam")
+            f7-list-item
+              f7-list-content(title="Adele")
+          f7-list-group(title="B")
+            f7-list-item
+              f7-list-content(title="Baron")
+            f7-list-item
+              f7-list-content(title="Bbbie")
+            f7-list-item
+              f7-list-content(title="Baron")
+            f7-list-item
+              f7-list-content(title="Bbbie")
+            f7-list-item
+              f7-list-content(title="Baron")
+            f7-list-item
+              f7-list-content(title="Bbbie")
+          f7-list-group(title="C")
+            f7-list-item
+              f7-list-content(title="Caiden")
+            f7-list-item
+              f7-list-content(title="Calvin")
+            f7-list-item
+              f7-list-content(title="Caiden")
+            f7-list-item
+              f7-list-content(title="Calvin")
+            f7-list-item
+              f7-list-content(title="Caiden")
+            f7-list-item
+              f7-list-content(title="Calvin")
+</template>          
