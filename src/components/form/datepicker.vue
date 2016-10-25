@@ -3,29 +3,31 @@
 </template>
 
 <script>
+  //  TODO i18n
+
   import { coerceBoolean } from '../../helpers/coerces'
   import { warn } from '../../helpers/utils'
 
   // Format date
-  function formatDate(date, p) {
-      date = new Date(date)
-      let year = date.getFullYear()
-      let month = date.getMonth()
-      let month1 = month + 1
-      let day = date.getDate()
-      let weekDay = date.getDay()
+  function formatDate (date, p) {
+    date = new Date(date)
+    let year = date.getFullYear()
+    let month = date.getMonth()
+    let month1 = month + 1
+    let day = date.getDate()
+    let weekDay = date.getDay()
 
-      return p.params.dateFormat
-          .replace(/yyyy/g, year)
-          .replace(/yy/g, (year + '').substring(2))
-          .replace(/mm/g, month1 < 10 ? '0' + month1 : month1)
-          .replace(/m(\W+)/g, month1 + '$1')
-          .replace(/MM/g, p.params.monthNames[month])
-          .replace(/M(\W+)/g, p.params.monthNamesShort[month] + '$1')
-          .replace(/dd/g, day < 10 ? '0' + day : day)
-          .replace(/d(\W+)/g, day + '$1')
-          .replace(/DD/g, p.params.dayNames[weekDay])
-          .replace(/D(\W+)/g, p.params.dayNamesShort[weekDay] + '$1');
+    return p.params.dateFormat
+        .replace(/yyyy/g, year)
+        .replace(/yy/g, (year + '').substring(2))
+        .replace(/mm/g, month1 < 10 ? '0' + month1 : month1)
+        .replace(/m(\W+)/g, month1 + '$1')
+        .replace(/MM/g, p.params.monthNames[month])
+        .replace(/M(\W+)/g, p.params.monthNamesShort[month] + '$1')
+        .replace(/dd/g, day < 10 ? '0' + day : day)
+        .replace(/d(\W+)/g, day + '$1')
+        .replace(/DD/g, p.params.dayNames[weekDay])
+        .replace(/D(\W+)/g, p.params.dayNamesShort[weekDay] + '$1')
   }
 
   function dateParse (date, isSecond = false) {
@@ -37,11 +39,11 @@
         let toNumber = Number.parseInt(date)
         if (Number.isNaN(toNumber)) {
           warn(new TypeError(`${date} is not a valid Date`))
-          return new Date
+          return new Date()
         } else {
-          time = inSecond ? new Date(toNumber * 1000) : new Date(toNumber)
+          time = isSecond ? new Date(toNumber * 1000) : new Date(toNumber)
         }
-      } 
+      }
       return time
     } else {
       return new Date(date)
@@ -56,23 +58,20 @@
       popover: {
         type: Boolean,
         default: false,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       cssClass: String,
       toolbar: {
         type: Boolean,
         default: true,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
-      toolbarCloseText: {
-        type: String,
-        default: 'Done',
-      },
+      toolbarCloseText: String,
 
       /**
-       * disabled dates 
+       * disabled dates
        * @type {DateRange}
        */
       disabledDates: [Function, Array, Object],
@@ -85,25 +84,17 @@
 
       value: [Date, String, Array],
 
-      monthNames: {
-        type: Array,
-      },
+      monthNames: Array,
 
-      monthNamesShort: {
-        type: Array,
-      },
+      monthNamesShort: Array,
 
-      dayNames: {
-        type: Array,
-      },
+      dayNames: Array,
 
-      dayNamesShort: {
-        type: Array,
-      },
+      dayNamesShort: Array,
 
       dateFormat: {
         type: String,
-        default: 'yyyy-mm-dd',
+        default: 'yyyy-mm-dd'
       },
 
       // alias of dateFormat
@@ -115,13 +106,13 @@
       multiple: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: false,
+        default: false
       },
 
       range: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: false,
+        default: false
       },
 
       min: Date,
@@ -131,39 +122,39 @@
       showWeek: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: true,
+        default: true
       },
 
       // alias of showWeek
       weekHeader: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: true,
+        default: true
       },
 
       yearPicker: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: true,
+        default: true
       },
 
       monthPicker: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: true,
+        default: true
       },
 
       animate: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: false,
+        default: false
       },
 
       closeOnSelect: {
         type: Boolean,
         coerce: coerceBoolean,
-        default: false,
-      },
+        default: false
+      }
     },
 
     methods: {
@@ -220,12 +211,11 @@
             formateds[i] = formatDate(values[i], this._datepicker)
           }
 
-          this.value  = formateds
+          this.value = formateds
         } else {
-          this.value  = formatDate(values[0], this._datepicker)
+          this.value = formatDate(values[0], this._datepicker)
         }
-      },
-       
+      }
     },
 
     ready () {
@@ -235,16 +225,15 @@
         onlyOnPopover: this.popover,
         cssClass: this.cssClass,
         toolbar: this.toolbar,
-        toolbarCloseText: this.toolbarCloseText,
-
+        toolbarCloseText: this.toolbarCloseText || this.$copywriting('doneText'),
         disabled: this.disabledDates,
         value: dates,
         events: this.events,
         rangesClasses: this.rangesClasses,
-        monthNames: this.monthNames,
-        monthNamesShort: this.monthNamesShort,
-        dayNames: this.dayNames,
-        dayNamesShort: this.dayNamesShort,
+        monthNames: this.monthNames || this.$copywriting('monthNames'),
+        monthNamesShort: this.monthNamesShort || this.$copywriting('monthNamesShort'),
+        dayNames: this.dayNames || this.$copywriting('dayNames'),
+        dayNamesShort: this.dayNamesShort || this.$copywriting('dayNamesShort'),
         dateFormat: this.format || this.dateFormat,
         formatValue: this.formatValue,
         multiple: this.multiple,
@@ -253,7 +242,7 @@
         maxDate: this.max,
         weekHeader: this.showWeek || this.weekHeader,
         monthPicker: this.monthPicker,
-        yearPicker: this.yearPicker,
+        yearPicker: this.yearPicker
       }
 
       // inline datepicker
@@ -265,7 +254,7 @@
         options = {...options, ...this.options}
       }
 
-      options.onChange = (p, values, displayValues) =>  {
+      options.onChange = (p, values, displayValues) => {
         this.$nextTick(() => {
           this.stringifyValue(values)
         })
@@ -284,6 +273,7 @@
 
     beforeDestroy () {
       this._datepicker.destroy()
-    },
+    }
   }
+
 </script>

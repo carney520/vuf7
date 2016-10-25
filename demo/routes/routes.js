@@ -185,6 +185,13 @@ const routeMap = {
     }
   },
 
+  '/picker': {
+    name: 'picker',
+    component: (resolve) => {
+      require(['views/picker'], resolve)
+    }
+  },
+
   '/pull-to-refresh': {
     name: 'pull-to-refresh',
     component: (resolve) => {

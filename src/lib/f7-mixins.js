@@ -5,6 +5,14 @@ export default function installMixins (Vue, app, $, options) {
   p.$app = app
   p.$$ = $
 
+  // get localization copywriting
+  p.$copywriting = function (name) {
+    if (name in options) {
+      let value = options[name]
+      return typeof value === 'function' ? value() : value
+    }
+  }
+
   p.$getSlot = function (name) {
     return this._slotContents && this._slotContents[name]
   }

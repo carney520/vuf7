@@ -52,6 +52,8 @@ div
        li 
          a(v-link="{name: 'photo-browser'}") Photo Browser
        li 
+         a(v-link="{name: 'picker'}") Picker
+       li 
          a(v-link="{name: 'datepicker'}") Date picker
        li 
          a(v-link="{name: 'pull-to-refresh'}") PullToRefresh

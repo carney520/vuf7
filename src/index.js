@@ -35,6 +35,7 @@ import {
   Textarea,
   Switch,
   Datepicker,
+  Picker,
   Slider,
   LazyImg
 } from './components/form'
@@ -74,6 +75,7 @@ export const components = {
   Textarea,
   Switch,
   Datepicker,
+  Picker,
   Slider,
   LazyImg
 }

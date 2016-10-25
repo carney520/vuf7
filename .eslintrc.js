@@ -1,16 +1,20 @@
 module.exports = {
-  'root': true,
+  root: true,
+  parser: 'babel-eslint',
   extends: 'standard',
-  'env': {
+  env: {
     'browser': true,
     'node': true,
     'es6': true
   },
-  "parserOptions": {
+  plugins: [
+    'html',
+  ],
+  parserOptions: {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
-  'rules': {
+  rules: {
     'arrow-parens': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0

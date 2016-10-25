@@ -5,12 +5,42 @@ import installMixins from './f7-mixins'
 const compatibleVersion = /^1\.4/
 let _Vue
 
+const copywritings = {
+  confirmText: 'OK',
+  closeText: 'Close',
+  doneText: 'Done',
+  cancelText: 'Cancel',
+  searchText: 'Search',
+  backText: 'Back',
+  loadingText: 'Loading...',
+  usernameText: 'Username',
+  passwordText: 'Password',
+  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+}
+
+function getCopyright (name, options) {
+  let copywriting = options[name] || copywritings[name]
+  return typeof copywriting === 'function' ? copywriting() : copywriting
+}
+
 /**
  * @param {Object} options - initialize options
  *   The extended options
  *     target {String} run platform, 'android' and 'ios' supported
- *     cancelText {String} ['Cacel']
+ *     // copywriting. value can be function that return required type data
+ *     confirmText {String} ['Ok']
+ *     closeText   {String} ['Close']
+ *     doneText    {String} ['Done']
+ *     cancelText {String} ['Cancel']
  *     searchText {String} ['Search']
+ *     backText   {String} ['Back']
+ *     monthNames {Array<String>}   ['January', 'February', ...'November', 'December']
+ *     monthNamesShort {Array<String>} ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'...]
+ *     dayNames {Array<String>} ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+ *     dayNamesShort {Array}  ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
  */
 export default {
   install (Vue, options = {}) {
@@ -28,14 +58,14 @@ export default {
     if (!F7) {
       throw new Error('Framework7 not found')
     }
-
     const target = options.target || (F7.prototype.device.android ? 'android' : 'ios')
 
     options = {
+      /* default options can be override */
       ...{
         androidStyles: [
-          'css/framework7.android.min.css',
-          'css/framework7.android.colors.min.css'
+          'css/framework7.material.min.css',
+          'css/framework7.material.colors.min.css'
         ],
         iosStyles: [
           'css/framework7.ios.min.css',
@@ -46,9 +76,20 @@ export default {
         swipePanel: 'left',
         // enable image or background lazy load
         lazyload: true,
-        imagesLazyLoadSequential: false
+        imagesLazyLoadSequential: false,
+        // copywriting
+        ...copywritings
       },
+      /* custom options */
       ...options,
+      // modal copywriting
+      modalButtonOk: options.modalButtonOk || getCopyright('confirmText', options),
+      modalButtonCancel: options.modalButtonCancel || getCopyright('cancelText', options),
+      modalPreloaderTitle: options.modalPreloaderTitle || getCopyright('loadingText', options),
+      modalUsernamePlaceholder: options.modalUsernamePlaceholder || getCopyright('usernameText', options),
+      modalPasswordPlaceholder: options.modalPasswordPlaceholder || getCopyright('passwordText', options),
+      notificationCloseButtonText: options.notificationCloseButtonText || getCopyright('closeText', options),
+      /* default can't be override */
       target,
       // disable cache, because we don't use F7 router to loader HTML content
       cache: false,
@@ -57,6 +98,8 @@ export default {
       // disable swipeBackPage. swipeBackPage haven't be supported so far
       swipeBackPage: false,
       smartSelectSearchbar: true,
+      pushState: false,
+      template7Pages: false,
       // lazy init
       init: false
     }
@@ -89,4 +132,3 @@ function checkF7Compatibility (app) {
     throw new Error('Current Version Vuf7 only compatible with Framework7 1.4.*.')
   }
 }
-

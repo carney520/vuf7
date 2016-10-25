@@ -15,10 +15,9 @@
     props: {
       placeholder: String,
       cancelText: String,
-      
       //  css Selector or HTML element to **search**
       searchList: {
-        default: '.list-block-search',
+        default: '.list-block-search'
       },
 
       //  Search key: css Selector of List View element's field where we need to search, default is '.item-title'
@@ -29,45 +28,43 @@
       //  disable search `searchList`
       customSearch: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
       removeDiacritics: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
       hideDividers: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
       hideGroups: {
         type: Boolean,
-        coerce: coerceBoolean,
-      },
+        coerce: coerceBoolean
+      }
     },
 
     data () {
       return {
         query: '',
-        active: false,
+        active: false
       }
     },
 
     computed: {
-      //TODO 响应式
-      params () {
-        return this._searchbar.params
-      },
-
       _placeholder () {
-        return this.$app.params.searchText || 'Search'
+        return this.placeholder || this.$copywriting('searchText')
       },
 
       _cancelText () {
-        return this.$app.params.cancelText || 'Cancel'
-      },
+        return this.cancelText || this.$copywriting('cancelText')
+      }
     },
 
     methods: {
+      getParams () {
+        return this._searchbar.params
+      },
       search (query) {
         this._searchbar.search(query)
       },
@@ -83,7 +80,7 @@
 
       destroy () {
         this._searchbar.destroy()
-      },
+      }
     },
 
     ready () {
@@ -113,12 +110,12 @@
         onClear: (s) => {
           this.query = ''
           this.$emit('clear', s)
-        },
+        }
       })
     },
 
     beforeDestroy () {
       this.destroy()
-    },
+    }
   }
 </script>
