@@ -21,6 +21,29 @@ export default function installMixins (Vue, app, $, options) {
     return $(el).parents('.' + app.params.viewClass)[0]
   }
 
+  p.$loadPage = function (name) {
+    let currentView = app.getCurrentView()
+    if (currentView) {
+      currentView.loadPage(name[0] === '#' ? name : '#' + name)
+    }
+  }
+
+  p.$successToast = function (content, duration) {
+    this.$showToast('success', content, duration)
+  }
+
+  p.$errorToast = function (content, duration) {
+    this.$showToast('error', content, duration)
+  }
+
+  p.$warningToast = function (content, duration) {
+    this.$showToast('warning', content, duration)
+  }
+
+  p.$infoToast = function (content, duration) {
+    this.$showToast('text', content, duration)
+  }
+
   function makeProxy (name) {
     let alias, orgName
     if (typeof name === 'string') alias = orgName = name
@@ -60,6 +83,8 @@ export default function installMixins (Vue, app, $, options) {
     'hidePreloader',
     'showIndicator',
     'hideIndicator',
+    'showToast',
+    'hideToast',
     'modal',
     'closeModal',
     //  action-sheet

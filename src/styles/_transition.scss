@@ -1,0 +1,60 @@
+// TODO
+.back-transition,
+.forward-transition {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform .3s ease;
+}
+
+.forward-enter {
+  transform: translate3d(100%, 0, 0);
+}
+
+.forward-leave {
+  transform: translate3d(-20%, 0, 0);
+  opacity: .5;
+}
+
+.back-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.back-leave {
+  transform: translate3d(20%, 0, 0);
+  opacity: .5;
+}
+
+// through
+.navbar {
+  .left,
+  .center,
+  .right {
+    transition: transform .3s ease, opacity .3s ease-out;
+    opacity: 1;
+}
+}
+
+.forward-enter,
+.back-leave {
+  .navbar {
+    .left,
+    .center,
+    .right {
+      transform: translate3d(-500%, 0, 0);
+      opacity: 0;
+    }
+  }
+}
+
+.forward-leave,
+.back-enter {
+  .navbar {
+    .left,
+    .center,
+    .right {
+      transform: translate3d(500%, 0, 0);
+      opacity: 0;
+    }
+  }
+}

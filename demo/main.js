@@ -7,12 +7,12 @@ if (process.env.NODE_ENV !== 'production') {
   Vue.config.debug = false
   Vue.config.devtools = false
 }
-
+import VueRouter from 'vue-router'
 import router from './routes'
 import App from './app'
 import Vuf7 from '../src'
 
-Vue.use(Vuf7, {
+Vue.use(Vuf7, VueRouter, {
   confirmText: '确定',
   closeText: '关闭',
   doneText: '完成',

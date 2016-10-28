@@ -1,6 +1,7 @@
 import installPatchs from './f7-patch'
 import installRouter from './f7-router'
 import installMixins from './f7-mixins'
+import installRouterTransition from './f7-transition'
 
 const compatibleVersion = /^1\.4/
 let _Vue
@@ -43,7 +44,7 @@ function getCopyright (name, options) {
  *     dayNamesShort {Array}  ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
  */
 export default {
-  install (Vue, options = {}) {
+  install (Vue, VueRouter, options = {}) {
     if (_Vue) {
       console.warn('Vuef already installed.')
       return
@@ -94,7 +95,7 @@ export default {
       // disable cache, because we don't use F7 router to loader HTML content
       cache: false,
       // disable router
-      router: false,
+      router: true,
       // disable swipeBackPage. swipeBackPage haven't be supported so far
       swipeBackPage: false,
       smartSelectSearchbar: true,
@@ -110,6 +111,7 @@ export default {
 
     let app = (Vue.app = new F7(options))
     checkF7Compatibility(app)
+    installRouterTransition(Vue, VueRouter, options)
     installDependency(Vue, app, Dom7, options)
     installRouter(Vue, app, Dom7, options)
     installPatchs(Vue, app, Dom7, options)
@@ -124,7 +126,7 @@ function installDependency (Vue, app, $, options) {
   let {target, androidStyles, iosStyles} = options
   let styles = target === 'android' ? androidStyles : iosStyles
   let stylesheets = styles.map(value => `<link rel="stylesheet" href="${value}">`).join('')
-  $('head').append(stylesheets)
+  $('head').prepend(stylesheets)
 }
 
 function checkF7Compatibility (app) {

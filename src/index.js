@@ -9,11 +9,12 @@ import { Page, PageContent } from './components/page'
 import { ContentBlock, ContentBlockTitle } from './components/content-block'
 import Card from './components/card'
 import Navbar from './components/navbar'
-import Toolbar from './components/toolbar'
+import { Toolbar, ToolbarItem } from './components/toolbar'
 import Panel from './components/panel'
 import { Tabs, Tab } from './components/tabs'
 import Searchbar from './components/searchbar'
 import { Row, Col } from './components/grid'
+import { Flexbox, FlexboxItem } from './components/flexbox'
 import { Popup, Popover, PickerModal } from './components/popup'
 import Preloader from './components/preloader'
 import {
@@ -39,8 +40,10 @@ import {
   Slider,
   LazyImg
 } from './components/form'
+import Icon from './components/icon'
 
 export const components = {
+  Icon,
   View,
   Page,
   PageContent,
@@ -49,12 +52,15 @@ export const components = {
   Card,
   Navbar,
   Toolbar,
+  ToolbarItem,
   Panel,
   Tabs,
   Tab,
   Searchbar,
   Row,
   Col,
+  Flexbox,
+  FlexboxItem,
   Popup,
   Popover,
   PickerModal,
@@ -84,11 +90,11 @@ export default {
   ...components,
   version: meta.version,
   F7,
-  install (Vue, options) {
+  install (Vue, VueRouter, options) {
     Object.keys(components).forEach((name) => {
       Vue.component('F7' + name, components[name])
     })
 
-    Vue.use(F7, options)
+    Vue.use(F7, VueRouter, options)
   }
 }

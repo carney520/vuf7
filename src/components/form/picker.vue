@@ -1,5 +1,6 @@
+<!-- note: don't use display value -->
 <template lang="jade">
-  input(type="text", :readonly="readonly")
+  input(type="text", :readonly="readonly", v-model="inputValue")
 </template>
 
 <script>
@@ -8,7 +9,8 @@
   export default {
     name: 'Picker',
     props: {
-      value: [String, Array],
+      value: {},
+      inputValue: {},
       // format input value
       formatValue: Function,
       // inline mode
@@ -86,6 +88,7 @@
     ready () {
       let options = {
         input: this.$el,
+        inputReadOnly: this.readonly,
         formatValue: this.formatValue,
         scrollToInput: this.scrollToInput,
         onlyOnPopover: this.popover,
@@ -93,7 +96,7 @@
         toolbar: this.toolbar,
         toolbarCloseText: this.toolbarCloseText || this.$copywriting('doneText'),
         rotateEffect: this.rotateEffect,
-        value: typeof this.value === 'string' ? [this.value] : this.value,
+        value: Array.isArray(this.value) ? this.value : [this.value],
         cols: this.cols
       }
 
@@ -115,7 +118,9 @@
         this.$emit('close', picker)
       }
 
-      this._picker = this.$picker(options)
+      this.$nextTick(() => {
+        this._picker = this.$picker(options)
+      })
     },
 
     beforeDestroy () {

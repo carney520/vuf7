@@ -2,6 +2,8 @@
  * framework monkey patch
  */
 
+import Icons from '../components/icon/manifest.json'
+
 /**
  * allowed destroy panels
  * @param  {[type]} app - F7 instance
@@ -54,9 +56,47 @@ function patchPage (app, $, options) {
   // disable init page on app init
   app.initPageWithCallback = function () {
     console.log('init page')
-    if (!options.initPageOnSetup) return
+    if (!options.initPageOnSetup) {
+      app.initPageWithCallback = orgInitPage
+      return
+    }
+
     console.log('inited page')
     orgInitPage.apply(app, arguments)
+  }
+}
+
+function patchToast (app, $, options) {
+  const icons = {
+    warning: Icons['ios-alert-outline'],
+    success: Icons['ios-checkmark-circle-outline'],
+    error: Icons['ios-close-circle-outline']
+  }
+
+  app.showToast = function (type = 'warning', text, duration) {
+    if ($('.preloader-indicator-overlay').length > 0) return
+    let toast = $(`
+      <div class="preloader-indicator-overlay">
+      </div>
+      <div class="f7-toast">` +
+      (type in icons
+       ? `<div class="f7-toast-icon">
+            <svg viewBox="0 0 ${icons[type].width} ${icons[type].height}">
+              <path d="${icons[type].d}">
+            </svg>
+          </div>
+         `
+       : '') +
+      `  <span class="f7-toast-title">${text}</span>
+      </div>`)
+    .appendTo('body')
+    if (duration) {
+      setTimeout(() => toast.remove(), duration)
+    }
+  }
+
+  app.hideToast = function () {
+    $('.preloader-indicator-overlay, .f7-toast').remove()
   }
 }
 
@@ -64,6 +104,7 @@ export default function installPatchs (Vue, app, $, options) {
   patchPage(app, $, options)
   patchPanel(app, $)
   patchResizableTextarea(app, $)
+  patchToast(app, $)
 
   app.onPageInit('*', function (page) {
     console.log('init', page)

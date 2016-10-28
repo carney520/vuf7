@@ -1,3 +1,7 @@
 import Toolbar from './toolbar'
+import ToolbarItem from './toolbar-item'
 
-export default Toolbar
+export { 
+  Toolbar,
+  ToolbarItem
+}

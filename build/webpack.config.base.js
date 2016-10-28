@@ -87,5 +87,8 @@ module.exports = {
     includePaths: [
       path.join(projectRoot, 'demo/assets/sass')
     ]
+  },
+  eslint: {
+    formatter: require('eslint-friendly-formatter')
   }
 }

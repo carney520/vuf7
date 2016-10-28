@@ -1,6 +1,7 @@
 <template lang="jade">
   .app
-    router-view.page-container(transition, v-r-transition, keep-alive)
+    //- use v-f7-transition to enable page transition
+    router-view.page-container(v-f7-transition, keep-alive)
 </template>
 
 <script>

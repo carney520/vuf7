@@ -1,18 +1,31 @@
 <template lang="jade">
-  .pages(:class="pagesClasses")
-    .page(:data-page="name", :class="pageClasses" )
-      slot
+  .page(:data-page="name", :class="pageClasses" )
+    slot
 </template>
 
 <script>
   import { coerceBoolean } from '../../helpers/coerces'
+  let uid = 0
 
   export default {
     name: 'Page',
     props: {
       name: {
         type: String,
-        default: 'main',
+        default () {
+          uid++
+          return 'page-' + uid
+        }
+      },
+
+      active: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
+
+      class: {
+        type: String,
+        default: ''
       },
 
       navbarType: {
@@ -31,35 +44,34 @@
 
       noNavbar: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       noToolbar: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       withSubnavbar: {
         type: Boolean,
-        coerce: coerceBoolean,
-      },
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
-      pagesClasses () {
+      pageClasses () {
         return [
           this.navbarType && `navbar-${this.navbarType}`,
           this.toolbarType && `toolbar-${this.toolbarType}`,
           this.noNavbar && 'no-navbar',
           this.noToolbar && 'no-toolbar',
+          ...this.class.split(/\s+/),
+          {
+            'with-subnavbar': this.withSubnavbar,
+            'page-on-center': this.active
+          }
         ]
-      },
-
-      pageClasses () {
-        return {
-          'with-subnavbar': this.withSubnavbar,
-        }
-      },
-    },
+      }
+    }
   }
 </script>

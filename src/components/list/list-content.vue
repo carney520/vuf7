@@ -4,8 +4,11 @@
       slot(name="media")
     .item-inner(v-if="!media")
       .item-title(:class="{label: input}", v-if="title") {{ title }}
-      .item-input(v-if="input")
-        slot
+      template(v-if="input")
+        .item-input(v-if="input")
+          slot
+        .item-after
+          slot(name="after")
       .item-after(v-else)
         slot
     .item-inner(v-else)

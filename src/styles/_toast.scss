@@ -1,0 +1,21 @@
+.f7-toast {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 8px;
+  background-color: rgba(black, .8);
+  z-index: 135000;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+}
+
+.f7-toast-icon {
+  margin: 0 1em;
+  svg {
+    fill: white;
+    width: 4em;
+    height: 4em;
+  }
+}
