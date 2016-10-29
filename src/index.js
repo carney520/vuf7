@@ -17,6 +17,7 @@ import { Row, Col } from './components/grid'
 import { Flexbox, FlexboxItem } from './components/flexbox'
 import { Popup, Popover, PickerModal } from './components/popup'
 import Preloader from './components/preloader'
+import Badge from './components/badge'
 import {
   ListBlock,
   ListGroup,
@@ -65,6 +66,7 @@ export const components = {
   Popover,
   PickerModal,
   Preloader,
+  Badge,
   ListBlock,
   ListGroup,
   ListItem,

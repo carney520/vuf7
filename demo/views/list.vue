@@ -9,16 +9,19 @@ div
         f7-list-block(title="List Block Title", label="List Block label")
           f7-list-item
             f7-list-content(title="Item Title")
-              i.icon.icon-f7(slot="media")
+              f7-badge(dot, slot="media")
+                i.icon.icon-f7
               span label
           f7-list-item
             f7-list-content(title="Item with badge")
-              i.icon.icon-f7(slot="media")
-              span.badge 5
+              f7-badge(text="5", slot="media")
+                i.icon.icon-f7
+              f7-badge(text="5")
           f7-list-divider List divider
           f7-list-item
             f7-list-content(title="link Item", link)
-              i.icon.icon-f7(slot="media")
+              f7-badge(text="120", overflow-count="99", slot="media")
+                i.icon.icon-f7
               span Label
 
         f7-list-block(title="Only Title")
