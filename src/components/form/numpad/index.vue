@@ -134,6 +134,7 @@
       // listen change
       this._keypad.$on('change', (value) => {
         this.value = value
+        this.$emit('change', value)
       })
     },
     attached () {

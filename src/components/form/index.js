@@ -5,6 +5,7 @@ import Picker from './picker'
 import Slider from './slider'
 import LazyImg from './lazy-img'
 import NumberPad from './numpad'
+import NumberPassword from './number-password'
 
 export {
   Textarea,
@@ -13,5 +14,6 @@ export {
   Picker,
   Slider,
   LazyImg,
-  NumberPad
+  NumberPad,
+  NumberPassword
 }

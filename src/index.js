@@ -40,7 +40,8 @@ import {
   Picker,
   Slider,
   LazyImg,
-  NumberPad
+  NumberPad,
+  NumberPassword
 } from './components/form'
 import Icon from './components/icon'
 
@@ -87,7 +88,8 @@ export const components = {
   Picker,
   Slider,
   LazyImg,
-  NumberPad
+  NumberPad,
+  NumberPassword
 }
 
 export default {
