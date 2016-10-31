@@ -4,6 +4,7 @@ import Datepicker from './datepicker'
 import Picker from './picker'
 import Slider from './slider'
 import LazyImg from './lazy-img'
+import NumberPad from './numpad'
 
 export {
   Textarea,
@@ -11,5 +12,6 @@ export {
   Datepicker,
   Picker,
   Slider,
-  LazyImg
+  LazyImg,
+  NumberPad
 }

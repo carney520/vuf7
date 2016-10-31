@@ -5,7 +5,7 @@
 
 <script>
   export default {
-    name: 'FlexboxItem',
+    name: 'FlexItem',
     props: {
       order: {
         type: String,

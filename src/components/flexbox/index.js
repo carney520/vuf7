@@ -1,7 +1,7 @@
-import Flexbox from './flexbox'
-import FlexboxItem from './flexbox-item'
+import Flex from './flexbox'
+import FlexItem from './flexbox-item'
 
 export {
-  Flexbox,
-  FlexboxItem
+  Flex,
+  FlexItem
 }

@@ -1,5 +1,5 @@
 <template lang="jade">
-  .f7-flex(:class="flexboxClasses", :style="styles")
+  .f7-flex(:class="flexboxClasses")
     slot
 </template>
 
@@ -7,12 +7,8 @@
   import { coerceBoolean } from '../../helpers/coerces'
 
   export default {
-    name: 'Flexbox',
+    name: 'Flex',
     props: {
-      gutter: {
-        type: String,
-        default: '8px'
-      },
       noGutter: {
         type: Boolean,
         coerce: coerceBoolean
@@ -59,20 +55,16 @@
       }
     },
     computed: {
-      styles () {
-        return {
-          'margin-left': this.noGutter ? '0' : this.gutter
-        }
-      },
       flexboxClasses () {
-        const {direction, align, justify, wrap, alignContent} = this
+        const {direction, align, justify, wrap, alignContent, inline, noGutter} = this
         return [
           direction && `f7-flex-dir-${direction}`,
           wrap && `f7-flex-wrap-${wrap}`,
           align && `f7-flex-ali-${align}`,
           justify && `f7-flex-jst-${justify}`,
           alignContent && `f7-flex-ali-content-${alignContent}`,
-          inline && 'f7-flex-inline'
+          inline && 'f7-flex-inline',
+          noGutter && 'f7-flex-no-gutter'
         ]
       }
     }
@@ -151,10 +143,16 @@
       }
     }
   }
+  .f7-flex.f7-flex-no-gutter {
+    .f7-flex-item {
+      margin-left: 0;
+    }
+  }
 
   .f7-flex-item {
     flex: 1;
     min-width: 20px;
+    margin-left: 8px;
 
     &:first-child {
       margin-left: 0 !important;
@@ -183,4 +181,5 @@
       }
     }
   }
+
 </style>

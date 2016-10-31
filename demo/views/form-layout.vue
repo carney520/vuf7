@@ -45,7 +45,10 @@ div
             f7-list-content(input, title="textarea")
               i.icon.icon-form-comment(slot="media")
               f7-textarea(resizable)
-
+          f7-list-item
+            f7-list-content(input, title="number pad")
+              i.icon.icon-form-comment(slot="media")
+              f7-number-pad
         f7-list-block(title="LIST CHECKBOX", :label="checkbox | json")
           f7-list-item
             f7-list-checkbox(checked, :value.sync="checkbox", checked-value="Books") Books
@@ -159,7 +162,11 @@ div
 </template>
 
 <script>
+  import NumberPad from '../../src/components/form/numpad'
   export default {
+    components: {
+      NumberPad
+    },
     data () {
       return {
         checkbox: [],
@@ -168,6 +175,7 @@ div
         radio2: null,
         smartSelect: null,
         smartSelect2: null,
+        numpad: ''
       }
     },
   }

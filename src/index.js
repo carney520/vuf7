@@ -14,7 +14,7 @@ import Panel from './components/panel'
 import { Tabs, Tab } from './components/tabs'
 import Searchbar from './components/searchbar'
 import { Row, Col } from './components/grid'
-import { Flexbox, FlexboxItem } from './components/flexbox'
+import { Flex, FlexItem } from './components/flexbox'
 import { Popup, Popover, PickerModal } from './components/popup'
 import Preloader from './components/preloader'
 import Badge from './components/badge'
@@ -39,7 +39,8 @@ import {
   Datepicker,
   Picker,
   Slider,
-  LazyImg
+  LazyImg,
+  NumberPad
 } from './components/form'
 import Icon from './components/icon'
 
@@ -60,8 +61,8 @@ export const components = {
   Searchbar,
   Row,
   Col,
-  Flexbox,
-  FlexboxItem,
+  Flex,
+  FlexItem,
   Popup,
   Popover,
   PickerModal,
@@ -85,7 +86,8 @@ export const components = {
   Datepicker,
   Picker,
   Slider,
-  LazyImg
+  LazyImg,
+  NumberPad
 }
 
 export default {

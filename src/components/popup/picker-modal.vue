@@ -17,7 +17,7 @@
       hide () {
         this.$closePickerModal(this.$el)
         this.$emit('hide')
-      },
-    },
+      }
+    }
   }
 </script>

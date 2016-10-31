@@ -8,17 +8,17 @@
     name: 'Popup',
     props: {
       size: {
-        type: String, 
+        type: String,
         validator: (value) => [undefined, 'tablet'].indexOf(value) !== -1
-      },
+      }
     },
 
     computed: {
       popupClasses () {
-       return {
-          'tablet-fullscreen': this.size === 'tablet',
+        return {
+          'tablet-fullscreen': this.size === 'tablet'
         }
-      },
+      }
     },
 
     methods: {
@@ -27,10 +27,13 @@
         this.$emit('show')
       },
 
-      hide() {
+      hide () {
         this.$closePopup(this.$el)
         this.$emit('hide')
-      },
+      }
     },
+    beforeDestroy () {
+      this.hide()
+    }
   }
 </script>

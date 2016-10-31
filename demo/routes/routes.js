@@ -192,6 +192,13 @@ const routeMap = {
     }
   },
 
+  '/number-pad': {
+    name: 'number-pad',
+    component: (resolve) => {
+      require(['views/number-pad'], resolve)
+    }
+  },
+
   '/pull-to-refresh': {
     name: 'pull-to-refresh',
     component: (resolve) => {

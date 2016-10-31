@@ -1,5 +1,5 @@
 <template lang="jade">
-  a.item-content(:class="{'item-link': link || accordion}")
+  div.item-content(:class="{'item-link': link || accordion}")
     .item-media(v-if="mediaInserted")
       slot(name="media")
     .item-inner(v-if="!media")
@@ -25,7 +25,7 @@
   import { coerceBoolean } from '../../helpers/coerces'
 
   export default {
-    name: "ListContent",
+    name: 'ListContent',
     props: {
       title: String,
       subtitle: String,
@@ -33,42 +33,49 @@
       href: String,
       link: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       media: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       input: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       accordion: {
         type: Boolean,
-        coerce: coerceBoolean,
-      },
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
       ListContentClasses () {
         return {
-          'item-link': this.href || this.link || this.accordion,
+          'item-link': this.href || this.link || this.accordion
         }
       },
 
       mediaInserted () {
         return this.$getSlot('media')
-      },
+      }
+    },
+    created () {
+      // change element
+      if (this.href || this.link) {
+        this.$options.template = this.$options.template.replace(/^<div\b/, '<a')
+        .replace(/<\/div>$/, '</a>')
+      }
     },
 
     compiled () {
       if (this.href) {
         this.$el.setAttribute('href', this.href)
       }
-    },
+    }
   }
 </script>
 

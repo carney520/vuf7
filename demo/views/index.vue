@@ -54,6 +54,8 @@ div
        li 
          a(v-link="{name: 'picker'}") Picker
        li 
+         a(v-link="{name: 'number-pad'}") Number pad
+       li 
          a(v-link="{name: 'datepicker'}") Date picker
        li 
          a(v-link="{name: 'pull-to-refresh'}") PullToRefresh
@@ -64,22 +66,3 @@ div
        li 
          a(v-link="{name: 'lazyload'}") lazyload
 </template>
-
-<script>
-  import { increase } from 'actions/test'
-
-  export default {
-    vuex: {
-      getters: {
-        num: (state) => state.test.num
-      },
-
-      actions: {
-        increase,
-      },
-    },
-  }
-</script>
-
-<style lang="scss">
-</style>
