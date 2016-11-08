@@ -26,7 +26,7 @@
     props: {
       dotButton: {
         type: Boolean,
-        default: true,
+        default: false,
         coerce: coerceBoolean
       },
       dotCharacter: {
@@ -143,7 +143,7 @@
       }
     },
     beforeDestroy () {
-      console.log('keypad destroy')
+      this.$remove()
     }
   }
 </script>

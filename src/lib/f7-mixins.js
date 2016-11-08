@@ -28,20 +28,30 @@ export default function installMixins (Vue, app, $, options) {
     }
   }
 
+  p.$historyBack = function () {
+    window.history.go(-1)
+  }
+
+  function showToast (type, content, duration) {
+    Vue.nextTick(() => {
+      app.showToast(type, content, duration)
+    })
+  }
+
   p.$successToast = function (content, duration) {
-    this.$showToast('success', content, duration)
+    showToast('success', content, duration)
   }
 
   p.$errorToast = function (content, duration) {
-    this.$showToast('error', content, duration)
+    showToast('error', content, duration)
   }
 
   p.$warningToast = function (content, duration) {
-    this.$showToast('warning', content, duration)
+    showToast('warning', content, duration)
   }
 
   p.$infoToast = function (content, duration) {
-    this.$showToast('text', content, duration)
+    showToast('text', content, duration)
   }
 
   function makeProxy (name) {
@@ -55,6 +65,7 @@ export default function installMixins (Vue, app, $, options) {
   }
 
   [
+    'swiper',
     //  pullToRefresh & infiniteScroll
     'pullToRefreshDone',
     'pullToRefreshTrigger',
@@ -113,6 +124,7 @@ export default function installMixins (Vue, app, $, options) {
     //  picker
     'picker',
     'calendar',
+    'swiper',
     ['datepicker', 'calendar']
   ].forEach((name) => {
     makeProxy(name)

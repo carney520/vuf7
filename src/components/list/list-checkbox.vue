@@ -1,6 +1,6 @@
 <template lang="jade">
   label.label-checkbox.item-content
-    input(type="checkbox", :name="name", v-model="value", :value="checkedValue", :checked="checked")
+    input(type="checkbox", :name="name", v-model="value", :value="checkedValue", :checked="checked", :disabled="disabled")
     .item-media
       i.icon.icon-form-checkbox
     .item-media(v-if="mediaInserted")
@@ -32,24 +32,28 @@
       value: {},
       checked: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
       checkedValue: {
-        required: true,
+        default: true
       },
 
       media: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
       title: String,
       subtitle: String,
       text: String,
+      disabled: {
+        type: Boolean,
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
       isMedia () {
-        return this.media || this.mediaInserted ||  this.subtitleInserted || this.textInserted
+        return this.media || this.mediaInserted || this.subtitleInserted || this.textInserted
       },
 
       mediaInserted () {
@@ -66,7 +70,7 @@
 
       textInserted () {
         return this.text || this.$getSlot('text')
-      },
-    },
+      }
+    }
   }
 </script>

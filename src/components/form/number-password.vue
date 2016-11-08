@@ -2,7 +2,7 @@
   .f7-num-pw
     number-pad.f7-num-pw-input(
       v-ref:numpad,
-      @change="handleChange",
+      :value.sync="value",
       :max-length="length", 
       :dot-button="dotButton",
       :toolbar="toolbar", 
@@ -39,6 +39,7 @@
         coerce: coerceBoolean
       },
       toolbarCloseText: String,
+      // only one number-password can set this field
       autoOpen: {
         type: Boolean,
         coerce: coerceBoolean,
@@ -51,10 +52,6 @@
       }
     },
     methods: {
-      handleChange (value) {
-        this.value = value
-      },
-
       open () {
         this.$refs.numpad.open()
       },
@@ -91,12 +88,15 @@
   .f7-num-pw {
     position: relative;
     padding: .5em;
+    overflow: hidden;
   }
 
   .f7-num-pw-input {
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     opacity: 0;
     z-index: 1;
   }

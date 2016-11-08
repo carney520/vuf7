@@ -11,7 +11,12 @@ import Card from './components/card'
 import Navbar from './components/navbar'
 import { Toolbar, ToolbarItem } from './components/toolbar'
 import Panel from './components/panel'
-import { Tabs, Tab } from './components/tabs'
+import {
+  Tabs,
+  Tab,
+  Tabshead,
+  TabsheadItem
+} from './components/tabs'
 import Searchbar from './components/searchbar'
 import { Row, Col } from './components/grid'
 import { Flex, FlexItem } from './components/flexbox'
@@ -32,6 +37,7 @@ import {
 
 import { AccordionList, AccordionItem } from './components/accordion'
 import { Button, ButtonsRow } from './components/button'
+import NoticeBar from './components/notice-bar'
 
 import {
   Textarea,
@@ -44,31 +50,25 @@ import {
   NumberPassword
 } from './components/form'
 import Icon from './components/icon'
+import {
+  Swiper,
+  SwiperSlide
+} from './components/swiper'
 
 export const components = {
-  Icon,
-  View,
-  Page,
-  PageContent,
+  AccordionList,
+  AccordionItem,
+  Badge,
+  ButtonsRow,
+  Button,
+  Card,
   ContentBlock,
   ContentBlockTitle,
-  Card,
-  Navbar,
-  Toolbar,
-  ToolbarItem,
-  Panel,
-  Tabs,
-  Tab,
-  Searchbar,
-  Row,
   Col,
+  Datepicker,
   Flex,
   FlexItem,
-  Popup,
-  Popover,
-  PickerModal,
-  Preloader,
-  Badge,
+  Icon,
   ListBlock,
   ListGroup,
   ListItem,
@@ -78,18 +78,33 @@ export const components = {
   ListCheckbox,
   ListRadio,
   ListSmartSelect,
-  AccordionList,
-  AccordionItem,
-  ButtonsRow,
-  Button,
-  Textarea,
-  Switch,
-  Datepicker,
-  Picker,
-  Slider,
   LazyImg,
   NumberPad,
-  NumberPassword
+  NumberPassword,
+  NoticeBar,
+  Navbar,
+  Page,
+  PageContent,
+  Panel,
+  Picker,
+  PickerModal,
+  Popup,
+  Popover,
+  Preloader,
+  Row,
+  Searchbar,
+  Slider,
+  Switch,
+  Swiper,
+  SwiperSlide,
+  Tabs,
+  Tab,
+  Tabshead,
+  TabsheadItem,
+  Textarea,
+  Toolbar,
+  ToolbarItem,
+  View
 }
 
 export default {

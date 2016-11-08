@@ -1,7 +1,7 @@
 <template lang="jade">
   label.label-radio.item-content
-    input(type="radio", :name="name", v-model="value", :value="checkedValue", :checked="checked")
-    .item-media(v-if="isAndroid")
+    input(type="radio", :name="name", v-model="value", :value="checkedValue", :checked="checked", :disabled="disabled")
+    .item-media(v-if="$android")
       i.icon.icon-form-radio
     .item-media(v-if="mediaInserted")
       slot(name="media")
@@ -31,27 +31,31 @@
       value: {},
       checked: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       checkedValue: {
-        required: true,
+        required: true
       },
 
       media: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       // TODO 更加灵活的slot
       title: String,
       subtitle: String,
       text: String,
+      disabled: {
+        type: Boolean,
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
       isMedia () {
-        return this.media || this.mediaInserted || this.subtitleInserted || this.textInserted
+        return this.media || this.subtitleInserted || this.textInserted
       },
 
       mediaInserted () {
@@ -68,7 +72,7 @@
 
       textInserted () {
         return this.text || this.$getSlot('text')
-      },
-    },
+      }
+    }
   }
 </script>

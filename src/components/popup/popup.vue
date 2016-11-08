@@ -32,8 +32,16 @@
         this.$emit('hide')
       }
     },
+    attached () {
+      this.$appendTo('body')
+    },
+    dettached () {
+      this.hide()
+      this.$remove()
+    },
     beforeDestroy () {
       this.hide()
+      this.$remove()
     }
   }
 </script>

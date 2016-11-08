@@ -31,3 +31,13 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .f7-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+  }
+</style>

@@ -1,7 +1,5 @@
 <template lang="jade">
-  .content-block-title(v-if="titleInserted") 
-    slot(name="title") {{ title }}
-  .list-block(:class="listBlockClasses")
+  .list-block(:class="listBlockClasses", :style="listBlockStyle")
     ul
       slot
     .list-block-label(v-if="labelInserted")
@@ -9,73 +7,81 @@
 </template>
 
 <script>
-  import { coerceBoolean,coerceClass } from '../../helpers/coerces'
+  import { coerceBoolean } from '../../helpers/coerces'
 
   export default {
     name: 'ListBlock',
     props: {
-      title: String,
       label: String,
 
       inset: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       tabletInset: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
-      'class': {
-        type: Array,
-        coerce: coerceClass,
+      noGutter: {
+        type: Boolean,
+        coerce: coerceBoolean
       },
 
-      //media list
+      smallGutter: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
+
+      // media list
       media: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       sortable: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       accordion: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       cards: {
         type: Boolean,
-        coerce: coerceBoolean,
-      },
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
       listBlockClasses () {
         return [
-          ...this.class,
           {
             'inset': this.inset,
             'tablet-inset': this.tabletInset,
             'media-list': this.media,
             'accordion-list': this.accordion,
             'cards-list': this.cards,
-            'sortable': this.sortable,
-          },
+            'sortable': this.sortable
+          }
         ]
       },
-
-      titleInserted () {
-        return this.$getSlot('title') || this.title
+      listBlockStyle () {
+        return {
+          'margin': this.noGutter
+            ? '0 0'
+            : this.smallGutter
+            ? '10px 0'
+            : undefined
+        }
       },
 
       labelInserted () {
         return this.$getSlot('label') || this.label
-      },
+      }
     },
 
     methods: {
@@ -89,7 +95,7 @@
 
       sortableToggle () {
         this.$sortableToggle(this.$el)
-      },
-    },
+      }
+    }
   }
 </script>

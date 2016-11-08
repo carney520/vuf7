@@ -71,6 +71,9 @@
         value = typeof value === 'string' ? [value] : value
         this._picker.setValues(value, duration)
       },
+      forceUpdate () {
+        this._picker.updateValue()
+      },
       open () {
         this._picker.open()
       },
@@ -82,6 +85,33 @@
       },
       getDisplayValue () {
         return this._picker.displayValue
+      },
+
+      _initializePicker () {
+        let p = this._picker
+        p.initialize = () => {
+          p._temp = this.$$('<div>')
+          p.layout()
+          p._temp.append(this.$$(p.pickerHTML))
+          // initialize cols
+          p._temp.find('.picker-items-col').each(function () {
+            let updateItems = true
+            if ((!p.initialized && p.params.value) || (p.initialized && p.value)) updateItems = false
+            p.initPickerCol(this, updateItems)
+          })
+          if (!p.initialized) {
+            if (p.value) p.setValue(p.value, 0)
+            else if (p.params.value) {
+              p.setValue(p.params.value, 0)
+            }
+          } else {
+            if (p.value) p.setValue(p.value, 0)
+          }
+
+          p.initialized = true
+        }
+
+        p.initialize()
       }
     },
 
@@ -120,6 +150,15 @@
 
       this.$nextTick(() => {
         this._picker = this.$picker(options)
+        this._initializePicker()
+        
+        if (this._picker._temp) {
+          let p = this._picker
+          p._temp.find('.picker-items-col').each(function () {
+            p.destroyPickerCol(this)
+          })
+          p._temp = null
+        }
       })
     },
 

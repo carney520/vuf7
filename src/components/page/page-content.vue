@@ -50,24 +50,24 @@
 
     methods: {
       pullToRefreshDone () {
-        if (!this.pullToRefresh) return 
+        if (!this.pullToRefresh) return
         this.$pullToRefreshDone(this.$el)
       },
 
       pullToRefreshTrigger () {
-        if (!this.pullToRefresh) return 
+        if (!this.pullToRefresh) return
         this.$pullToRefreshTrigger(this.$el)
       },
 
       attachInfiniteScroll () {
-        if (!this.infiniteScroll) return 
+        if (!this.infiniteScroll) return
         this.$attachInfiniteScroll(this.$el)
       },
 
       detachInfiniteScroll () {
-        if (!this.infiniteScroll) return 
+        if (!this.infiniteScroll) return
         this.$detachInfiniteScroll(this.$el)
-      },
+      }
     },
 
     ready () {

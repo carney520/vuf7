@@ -76,8 +76,6 @@ function patchToast (app, $, options) {
   app.showToast = function (type = 'warning', text, duration) {
     if ($('.preloader-indicator-overlay').length > 0) return
     let toast = $(`
-      <div class="preloader-indicator-overlay">
-      </div>
       <div class="f7-toast">` +
       (type in icons
        ? `<div class="f7-toast-icon">
@@ -90,6 +88,11 @@ function patchToast (app, $, options) {
       `  <span class="f7-toast-title">${text}</span>
       </div>`)
     .appendTo('body')
+
+    $('html').on('click', () => {
+      toast.remove()
+    })
+    
     if (duration) {
       setTimeout(() => toast.remove(), duration)
     }

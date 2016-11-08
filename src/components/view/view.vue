@@ -67,8 +67,6 @@
       // initial view on $el attach to document
       this._view = this.$app.addView(this.$els.view, {
         ...this.options,
-        // for smart select
-        dynamicNavbar: true,
         domCache: true
       })
 

@@ -1,10 +1,8 @@
 <template lang="jade">
-  input(type="text", readonly, v-model="value")
+  input(type="text", readonly)
 </template>
 
 <script>
-  //  TODO i18n
-
   import { coerceBoolean } from '../../helpers/coerces'
   import { warn } from '../../helpers/utils'
 
@@ -83,6 +81,7 @@
       rangesClasses: Array,
 
       value: [Date, String, Array],
+      date: [Date, Array],
 
       monthNames: Array,
 
@@ -207,13 +206,17 @@
       stringifyValue (values) {
         if (this.multiple || this.range) {
           let formateds = []
+          let dates = []
           for (let i = 0, l = values.length; i < l; i++) {
             formateds[i] = formatDate(values[i], this._datepicker)
+            dates[i] = new Date(values[i])
           }
 
           this.value = formateds
+          this.date = dates
         } else {
           this.value = formatDate(values[0], this._datepicker)
+          this.date = new Date(values[0])
         }
       }
     },
@@ -224,6 +227,7 @@
         input: this.$el,
         onlyOnPopover: this.popover,
         cssClass: this.cssClass,
+        closeOnSelect: this.closeOnSelect,
         toolbar: this.toolbar,
         toolbarCloseText: this.toolbarCloseText || this.$copywriting('doneText'),
         disabled: this.disabledDates,
@@ -268,7 +272,9 @@
         this.$emit('close', p)
       }
 
-      this._datepicker = this.$datepicker(options)
+      this.$nextTick(() => {
+        this._datepicker = this.$datepicker(options)
+      })
     },
 
     beforeDestroy () {

@@ -1,6 +1,5 @@
 <template lang="jade">
-  .content-block-title(v-if="title") {{ title }}
-  .content-block(:class="contentBlockClasses")
+  .content-block(:class="contentBlockClasses", :style="contentblockStyle")
     .content-block-inner(v-if="innerInserted")
       slot(name="inner")
     slot
@@ -8,25 +7,27 @@
 
 
 <script>
-  import { coerceBoolean, coerceClass } from '../../helpers/coerces'
+  import { coerceBoolean } from '../../helpers/coerces'
 
   export default {
     name: 'ContentBlock',
     props: {
-      title: String,
       inset: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
       tabletInset: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
-
-      'class': {
-        type: Array,
-        coerce: coerceClass,
+      noGutter: {
+        type: Boolean,
+        coerce: coerceBoolean
       },
+      smallGutter: {
+        type: Boolean,
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
@@ -34,15 +35,24 @@
         return this.$getSlot('inner')
       },
 
+      contentblockStyle () {
+        return {
+          'margin': this.noGutter
+            ? '0 0'
+            : this.smallGutter
+            ? '10px 0'
+            : undefined
+        }
+      },
+
       contentBlockClasses () {
         return [
-          ...this.class,
           {
             'inset': this.inset,
-            'tablet-inset': this.tabletInset,
-          },
+            'tablet-inset': this.tabletInset
+          }
         ]
-      },
-    },
+      }
+    }
   }
 </script>

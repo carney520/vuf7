@@ -17,7 +17,7 @@
       hide () {
         this.$closePopover(this.$el)
         this.$emit('hide')
-      },
-    },
+      }
+    }
   }
 </script>

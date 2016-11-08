@@ -1,5 +1,5 @@
 <template lang="jade">
-  input(v-el:input, type="text", readonly, v-model="value", :disabled="disabled")
+  input(v-el:input, readonly, v-model="value", :disabled="disabled")
 </template>
 
 <script>
@@ -11,7 +11,10 @@
   export default {
     name: 'NumberPad',
     props: {
-      dotButton: {},
+      dotButton: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
       dotCharacter: {},
       maxLength: {},
       value: {},
@@ -131,10 +134,14 @@
       this.$children.push(this._keypad)
       this._keypad.$parent = this
 
-      // listen change
+      // two way bind. fixed me
       this._keypad.$on('change', (value) => {
         this.value = value
         this.$emit('change', value)
+      })
+
+      this.$watch('value', (value) => {
+        this._keypad.value = value
       })
     },
     attached () {
@@ -156,6 +163,7 @@
     beforeDestroy () {
       this.$input.off('click focus', this._openOnInput)
       this.$$('html').off('click')
+      this._keypad.$destroy()
     }
   }
 </script>
