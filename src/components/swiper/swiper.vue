@@ -2,11 +2,12 @@
   .swiper-container
     .swiper-wrapper
       slot
-    .swiper-pagination(v-if="showPagination")
+    .swiper-pagination(v-el:pagination, v-if="showPagination")
     template(v-if="showNavButtons")
-      .swiper-button-prev
-      .swiper-button-next
-    .swiper-scrollbar(v-if="showScrollbar")
+      .swiper-button-prev(v-el:prev)
+      .swiper-button-next(v-el:next)
+    .swiper-scrollbar(v-el:scrollbar, v-if="showScrollbar")
+    slot(name="after")
 </template>
 
 <script>
@@ -77,6 +78,16 @@
         type: Boolean,
         coerce: coerceBoolean
       },
+      paginationType: {
+        default: 'bullets',
+        validator (value) {
+          return ['bullets', 'fraction', 'progress', 'custom'].indexOf(value) !== -1
+        }
+      },
+      paginationClickable: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
 
       // raw options
       options: {
@@ -115,10 +126,10 @@
     },
     ready () {
       const { initialSlide, direction, speed, nested, autoplay, autoplayStopOnLast, autoplayDisableOnInteraction,
-        effect, parallax, loop
+        effect, parallax, loop, paginationType, paginationClickable
       } = this
       // init swiper
-      const options = {
+      let options = {
         initialSlide,
         direction,
         speed,
@@ -129,8 +140,24 @@
         effect,
         parallax,
         loop,
+        paginationType,
+        paginationClickable,
         ...options
       }
+
+      if (this.showPagination) {
+        options.pagination = this.$els.pagination
+      }
+
+      if (this.showNavButtons) {
+        options.prevButton = this.$els.prev
+        options.nextButton = this.$els.next
+      }
+
+      if (this.showScrollbar) {
+        options.scrollbar = this.$els.scrollbar
+      }
+
       this.$nextTick(() => {
         this._swiper = this.$swiper(this.$el, options)
       })

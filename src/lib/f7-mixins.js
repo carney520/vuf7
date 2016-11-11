@@ -1,7 +1,7 @@
 export default function installMixins (Vue, app, $, options) {
   let p = Vue.prototype
-  p.$android = app.device.android
-  p.$ios = app.device.ios
+  p.$android = options.target === 'android'
+  p.$ios = options.target === 'ios'
   p.$app = app
   p.$$ = $
 

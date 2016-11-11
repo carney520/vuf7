@@ -17,12 +17,12 @@
   export default {
     name: 'Navbar',
     props: {
-      title: String,
+      title: String
     },
     computed: {
       subnavbarInserted () {
         return this.$getSlot('default') || this.$getSlot('subnavbar')
-      },
+      }
     },
     methods: {
       hide () {
@@ -31,16 +31,16 @@
 
       show () {
         this.$showNavbar(this.$el)
-      },
+      }
     },
 
     ready () {
       if (this.subnavbarInserted) {
-        let pageContainer = this.$getPageContainer()
+        let pageContainer = this.$getPageContainer(this.$el)
         if (pageContainer) {
           this.$$(pageContainer).find('.page').addClass('with-subnavbar')
         }
       }
-    },
+    }
   }
 </script>

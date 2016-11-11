@@ -22,22 +22,22 @@
     props: {
       swipeable: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       sortable: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       accordion: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       align: {
-        type: String,
-      },
+        type: String
+      }
     },
 
     computed: {
@@ -46,7 +46,7 @@
           this.align && `align-${this.align}`,
           {
             'swipeout': this.swipeable,
-            'accordion-item': this.accordion,
+            'accordion-item': this.accordion
           }
         ]
       },
@@ -57,14 +57,14 @@
 
       actionsRightInserted () {
         return this.$getSlot('actions-right')
-      },
+      }
     },
 
     methods: {
       // open swipeout actions
       swipeoutOpen (direction, callback) {
-        if (!this.swipeable) return 
-        direction = direction || this.actionsLeftInserted 
+        if (!this.swipeable) return
+        direction = direction || this.actionsLeftInserted
           ? 'left'
           : this.actionsRightInserted
             ? 'right'
@@ -74,12 +74,12 @@
 
       // close swipeout actions
       swipeoutClose (callback) {
-        if (!this.swipeable) return 
+        if (!this.swipeable) return
         this.$app.swipeoutClose(this.$el, callback)
       },
 
       swipeoutDelete (callback) {
-        if (!this.swipeable) return 
+        if (!this.swipeable) return
         this.$app.swipeoutDelete(this.$el, callback)
       },
 
@@ -93,8 +93,8 @@
 
       accordionToggle () {
         this.$app.accordionToggle(this.$el)
-      },
+      }
 
-    },
+    }
   }
 </script>

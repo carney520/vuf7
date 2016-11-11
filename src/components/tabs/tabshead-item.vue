@@ -22,7 +22,7 @@
       activeClass: {
         type: String,
         default: 'selected'
-      },
+      }
     },
     data () {
       return {

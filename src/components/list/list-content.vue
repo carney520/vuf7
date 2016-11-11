@@ -1,9 +1,14 @@
 <template lang="jade">
-  div.item-content(:class="{'item-link': link || accordion}")
+  div.item-content(:class="listContentClasses")
+    input(v-if="selectable && selectMode", type="checkbox", :value="selectedValue", v-model="selectSource")
+    .item-media(v-if="selectable && selectMode", transition="expand")
+      i.icon.icon-form-checkbox
     .item-media(v-if="mediaInserted")
       slot(name="media")
     .item-inner(v-if="!isMedia")
-      .item-title(:class="{label: input}", v-if="title") {{ title }}
+      .item-title(:class="{label: input}", v-if="titleInserted") 
+        slot(name="title")
+          |{{ title }}
       template(v-if="input")
         .item-input(v-if="input")
           slot
@@ -13,7 +18,9 @@
         slot
     .item-inner(v-else)
       .item-title-row
-        .item-title(v-if="title") {{ title }}
+        .item-title(v-if="titleInserted") 
+          slot(name="title")
+            |{{ title }}
         .item-after
           slot
           slot(name="after")
@@ -54,13 +61,24 @@
       accordion: {
         type: Boolean,
         coerce: coerceBoolean
-      }
+      },
+      selectable: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
+      selectMode: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
+      selectedValue: {},
+      selectSource: {}
     },
 
     computed: {
-      ListContentClasses () {
+      listContentClasses () {
         return {
-          'item-link': this.href || this.link || this.accordion
+          'item-link': this.href || this.link || this.accordion,
+          'label-checkbox': this.selectable && this.selectMode
         }
       },
 
@@ -70,6 +88,10 @@
 
       mediaInserted () {
         return this.$getSlot('media')
+      },
+
+      titleInserted () {
+        return this.title || this.$getSlot('title')
       },
 
       subtitleInserted () {
@@ -89,6 +111,9 @@
       if (this.href || this.link) {
         this.$options.template = this.$options.template.replace(/^<div\b/, '<a')
         .replace(/<\/div>$/, '</a>')
+      } else if (this.selectable) {
+        this.$options.template = this.$options.template.replace(/^<div\b/, '<label')
+        .replace(/<\/div>$/, '</label>')
       }
     },
 
@@ -126,5 +151,24 @@
     max-height: 28px;
     white-space: nowrap;
     color: #8e8e93;
+  }
+
+  .expand-transition {
+    transition: all .4s ease;
+    width: 22px;
+
+    & + .item-inner {
+      transition: all .2s ease;
+    }
+  }
+
+  .expand-enter,
+  .expand-leave {
+    width: 0;
+    opacity: 0;
+
+    & + .item-inner {
+      margin-left: 0 !important;
+    }
   }
 </style>

@@ -52,6 +52,11 @@
         coerce: coerceBoolean
       },
 
+      noTabbar: {
+        type: Boolean,
+        coerce: coerceBoolean
+      },
+
       withSubnavbar: {
         type: Boolean,
         coerce: coerceBoolean
@@ -65,6 +70,7 @@
           this.toolbarType && `toolbar-${this.toolbarType}`,
           this.noNavbar && 'no-navbar',
           this.noToolbar && 'no-toolbar',
+          this.noTabbar && 'no-tabbar',
           ...this.class.split(/\s+/),
           {
             'with-subnavbar': this.withSubnavbar,

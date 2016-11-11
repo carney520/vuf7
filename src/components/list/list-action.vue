@@ -12,22 +12,21 @@
       background: String,
       close: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       delete: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       overswipe: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
-
       href: String,
       confirmText: String,
-      confirmTitle: String,
+      confirmTitle: String
     },
 
     computed: {
@@ -37,10 +36,10 @@
           {
             'swipeout-delete': this.delete,
             'swipeout-close': this.close,
-            'swipeout-overswipe': this.overswipe,
-          },
+            'swipeout-overswipe': this.overswipe
+          }
         ]
       }
-    },
+    }
   }
 </script>

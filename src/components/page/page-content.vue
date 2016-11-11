@@ -1,5 +1,5 @@
 <template lang="jade">
-  .page-content(:class="pageContentClasses", :data-ptr-distance="ptrDistance", :data-distance="distance")
+  .page-content(:class="pageContentClasses", :style="pageContentStyle", :data-ptr-distance="ptrDistance", :data-distance="distance")
     .pull-to-refresh-layer(v-if="pullToRefresh")
       .preloader
       .pull-to-refresh-arrow
@@ -14,28 +14,32 @@
     props: {
       contacts: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       pullToRefresh: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       infiniteScroll: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       ptrDistance: {
         type: Number,
-        coerce: coerceNumber,
+        coerce: coerceNumber
       },
 
       distance: {
         type: Number,
-        coerce: coerceNumber,
+        coerce: coerceNumber
       },
+      withSubnavbar: {
+        type: Boolean,
+        coerce: coerceBoolean
+      }
     },
 
     computed: {
@@ -43,9 +47,14 @@
         return {
           'contacts-content': this.contacts,
           'pull-to-refresh-content': this.pullToRefresh,
-          'infinite-scroll': this.infiniteScroll,
+          'infinite-scroll': this.infiniteScroll
         }
       },
+      pageContentStyle () {
+        return {
+          'padding-top': (this.$ios && this.withSubnavbar) ? '88px' : null
+        }
+      }
     },
 
     methods: {
@@ -105,6 +114,15 @@
       if (this.$app.params.lazyload) {
         this.$app.destroyImagesLazyLoad(this.$el)
       }
-    },
+    }
   }
 </script>
+
+<style>
+  .pull-to-refresh-layer .preloader {
+    width: 20px !important;
+    height: 20px !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+  }
+</style>

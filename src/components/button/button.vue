@@ -11,27 +11,32 @@
       href: String,
       active: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
+      },
+
+      tab: {
+        type: Boolean,
+        coerce: coerceBoolean
       },
 
       round: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       big: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       fill: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       list: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
       color: String,
@@ -39,10 +44,10 @@
       // android
       raised: {
         type: Boolean,
-        coerce: coerceBoolean,
+        coerce: coerceBoolean
       },
 
-      rippleColor: String,
+      rippleColor: String
     },
 
     computed: {
@@ -57,12 +62,13 @@
             'button-big': this.big,
             'button-fill': this.fill,
             'item-link': this.list,
+            'tab-link': this.tab,
             'list-button': this.list,
-            //android
-            'button-raised': this.raised,
-          },
+            // android
+            'button-raised': this.raised
+          }
         ]
-      },
-    },
+      }
+    }
   }
 </script>

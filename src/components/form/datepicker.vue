@@ -93,7 +93,7 @@
 
       dateFormat: {
         type: String,
-        default: 'yyyy-mm-dd'
+        default: 'yyyy/mm/dd'
       },
 
       // alias of dateFormat
