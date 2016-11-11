@@ -1,16 +1,20 @@
 <template lang="jade">
   .page-content(:class="pageContentClasses", :style="pageContentStyle", :data-ptr-distance="ptrDistance", :data-distance="distance")
     .pull-to-refresh-layer(v-if="pullToRefresh")
-      .preloader
+      preloader
       .pull-to-refresh-arrow
     slot
 </template>
 
 <script>
   import { coerceBoolean, coerceNumber } from '../../helpers/coerces'
+  import Preloader from '../preloader'
 
   export default {
     name: 'PageContent',
+    components: {
+      Preloader
+    },
     props: {
       contacts: {
         type: Boolean,

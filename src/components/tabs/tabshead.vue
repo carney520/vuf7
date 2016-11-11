@@ -77,6 +77,7 @@ $tabshead-height: 2.5em;
 
 .f7-tabshead-item {
   display: block;
+  position: relative;
   flex: 1;
   width: 100%;
   height: 100%;

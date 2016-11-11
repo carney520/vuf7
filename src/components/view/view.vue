@@ -27,7 +27,7 @@
       toolbarType: {
         type: String,
         validator (value) {
-          return [undefined, 'fixed', 'through'].indexOf(value) !== -1
+          return [undefined, 'fixed', 'through', 'bottom'].indexOf(value) !== -1
         }
       },
 

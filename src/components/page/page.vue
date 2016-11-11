@@ -38,7 +38,7 @@
       toolbarType: {
         type: String,
         validator (value) {
-          return [undefined, 'fixed', 'through'].indexOf(value) !== -1
+          return [undefined, 'fixed', 'through', 'bottom'].indexOf(value) !== -1
         }
       },
 
@@ -81,3 +81,11 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .f7-android {
+    .toolbar-bottom .page-content {
+      padding-bottom: 75px;
+    }
+  }
+</style>

@@ -1,5 +1,12 @@
 <template lang="jade">
-  span.preloader(:class="{'preloader-white': white}")
+  span.preloader(:class="preloaderClasses")
+    template(v-if="$android")
+      span.preloader-inner
+        span.preloader-inner-gap
+        span.preloader-inner-left
+          span.preloader-inner-half-circle
+        span.preloader-inner-right
+          span.preloader-inner-half-circle
 </template>
 
 <script>
@@ -8,10 +15,18 @@
   export default {
     name: 'Preloader',
     props: {
-      white: {
+      color: String,
+      big: {
         type: Boolean,
-        coerce: coerceBoolean,
-      },
+        coerce: coerceBoolean
+      }
     },
+    computed: {
+      preloaderClasses () {
+        return [
+          this.color && `preloader-${this.color}`
+        ]
+      }
+    }
   }
 </script>
