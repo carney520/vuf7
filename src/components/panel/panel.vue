@@ -34,7 +34,7 @@
         type: String,
         default: 'reveal',
         validator: (value) => ['reveal', 'cover'].indexOf(value) !== -1
-      },
+      }
     },
 
     computed: {
@@ -48,31 +48,31 @@
 
       leftClasses () {
         return [
-          `panel-${this.type}`,
+          `panel-${this.type}`
         ]
       },
 
       rightClasses () {
         return [
-          `panel-${this.rightType}`,
+          `panel-${this.rightType}`
         ]
-      },
+      }
     },
 
     methods: {
       open (pos) {
-        pos = pos || this.leftInserted 
+        pos = pos || this.leftInserted
           ? 'left'
           : this.rightInserted
           ? 'right'
           : null
-        if (!pos) return 
+        if (!pos) return
         this.$openPanel(pos)
       },
 
       close () {
         this.$closePanel()
-      },
+      }
     },
 
     ready () {
@@ -82,6 +82,6 @@
 
     beforeDestroy () {
       this.$app.destroySwipePanels()
-    },
+    }
   }
 </script>

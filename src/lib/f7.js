@@ -3,7 +3,7 @@ import installRouter from './f7-router'
 import installMixins from './f7-mixins'
 import installRouterTransition from './f7-transition'
 
-const compatibleVersion = /^1\.4/
+const compatibleVersion = /^1\.(4|5)/
 let _Vue
 
 const copywritings = {
@@ -127,10 +127,11 @@ function installDependency (Vue, app, $, options) {
   let styles = target === 'android' ? androidStyles : iosStyles
   let stylesheets = styles.map(value => `<link rel="stylesheet" href="${value}">`).join('')
   $('head').prepend(stylesheets)
+  $('html').addClass('f7-' + target)
 }
 
 function checkF7Compatibility (app) {
   if (!compatibleVersion.test(app.version)) {
-    throw new Error('Current Version Vuf7 only compatible with Framework7 1.4.*.')
+    throw new Error('Current Version Vuf7 only compatible with Framework7 1.(4|5).*.')
   }
 }

@@ -108,7 +108,7 @@
     },
     created () {
       // change element
-      if (this.href || this.link) {
+      if (this.href || this.link || this.accordion) {
         this.$options.template = this.$options.template.replace(/^<div\b/, '<a')
         .replace(/<\/div>$/, '</a>')
       } else if (this.selectable) {

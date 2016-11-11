@@ -32,15 +32,6 @@
       show () {
         this.$showNavbar(this.$el)
       }
-    },
-
-    ready () {
-      if (this.subnavbarInserted) {
-        let pageContainer = this.$getPageContainer(this.$el)
-        if (pageContainer) {
-          this.$$(pageContainer).find('.page').addClass('with-subnavbar')
-        }
-      }
     }
   }
 </script>

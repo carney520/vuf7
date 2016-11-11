@@ -55,13 +55,11 @@ function patchPage (app, $, options) {
 
   // disable init page on app init
   app.initPageWithCallback = function () {
-    console.log('init page')
     if (!options.initPageOnSetup) {
       app.initPageWithCallback = orgInitPage
       return
     }
 
-    console.log('inited page')
     orgInitPage.apply(app, arguments)
   }
 }
@@ -92,7 +90,7 @@ function patchToast (app, $, options) {
     $('html').on('click', () => {
       toast.remove()
     })
-    
+
     if (duration) {
       setTimeout(() => toast.remove(), duration)
     }
@@ -108,12 +106,4 @@ export default function installPatchs (Vue, app, $, options) {
   patchPanel(app, $)
   patchResizableTextarea(app, $)
   patchToast(app, $)
-
-  app.onPageInit('*', function (page) {
-    console.log('init', page)
-  })
-
-  app.onPageBeforeRemove('*', function (page) {
-    console.log('remove', page)
-  })
 }

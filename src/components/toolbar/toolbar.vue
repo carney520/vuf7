@@ -17,11 +17,17 @@
       withLabels: {
         type: Boolean,
         coerce: coerceBoolean
+      },
+      // material only
+      bottom: {
+        type: Boolean,
+        coerce: coerceBoolean
       }
     },
     computed: {
       toolbarClasses () {
         return {
+          'toolbar-bottom': this.bottom,
           'tabbar': this.tabbar,
           'tabbar-labels': this.withLabels
         }

@@ -1,10 +1,10 @@
 <template lang="jade">
 div
   f7-view
-    f7-navbar
-      span(f7-back, slot="left") back
-      span(slot="center") Form Layout
-    f7-page(name="navbar", navbar-type="fixed", toolbar-type="fixed", transition="fade")
+    f7-page(name="navbar", navbar-type="fixed", toolbar-type="fixed")
+      f7-navbar
+        span(f7-back, slot="left") back
+        span(slot="center") Form Layout
       f7-page-content
         f7-list-block(title="FULL LAYOUT")
           f7-list-item
@@ -177,6 +177,6 @@ div
         smartSelect2: null,
         numpad: ''
       }
-    },
+    }
   }
 </script>
