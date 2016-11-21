@@ -46,9 +46,12 @@
       pagesClasses () {
         return [
           this.navbarType && `navbar-${this.navbarType}`,
-          this.toolbarType && `toolbar-${this.toolbarType}`,
+          this.toolbarType && this.toolbarType !== 'bottom' && `toolbar-${this.toolbarType}`,
           this.noNavbar && 'no-navbar',
-          this.noToolbar && 'no-toolbar'
+          this.noToolbar && 'no-toolbar',
+          {
+            'f7-toolbar-bottom': this.toolbarType === 'bottom'
+          }
         ]
       }
     },

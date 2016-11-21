@@ -71,10 +71,10 @@
       },
       listBlockStyle () {
         return {
-          'margin': this.noGutter
-            ? '0 0'
+          'margin-top': this.noGutter
+            ? '0'
             : this.smallGutter
-            ? '10px 0'
+            ? '10px'
             : undefined
         }
       },

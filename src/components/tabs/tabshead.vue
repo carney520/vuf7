@@ -71,8 +71,6 @@ $tabshead-height: 2.5em;
   background: #fff;
   height: $tabshead-height;
   position: relative;
-  //default color
-  color: #007aff;
 }
 
 .f7-tabshead-item {

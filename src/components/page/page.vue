@@ -67,12 +67,13 @@
       pageClasses () {
         return [
           this.navbarType && `navbar-${this.navbarType}`,
-          this.toolbarType && `toolbar-${this.toolbarType}`,
+          this.toolbarType && this.toolbarType !== 'bottom' && `toolbar-${this.toolbarType}`,
           this.noNavbar && 'no-navbar',
           this.noToolbar && 'no-toolbar',
           this.noTabbar && 'no-tabbar',
           ...this.class.split(/\s+/),
           {
+            'f7-toolbar-bottom': this.toolbarType === 'bottom',
             'with-subnavbar': this.withSubnavbar,
             'page-on-center': this.active
           }
@@ -84,8 +85,8 @@
 
 <style lang="scss">
   .f7-android {
-    .toolbar-bottom .page-content {
-      padding-bottom: 75px;
+    .f7-toolbar-bottom .page-content {
+      padding-bottom: 48px;
     }
   }
 </style>

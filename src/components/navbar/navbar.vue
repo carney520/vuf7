@@ -35,3 +35,29 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .f7-ios {
+    .navbar-inner {
+      .left, .center, .right {
+        flex: 1;
+      }
+
+      .left {
+        justify-content: flex-start;
+      }
+
+      .center {
+        justify-content: center;
+
+        &:last-child {
+          padding-right: 33.33%;
+        }
+      }
+
+      .right {
+        justify-content: flex-end;
+      }
+    }
+  }
+</style>

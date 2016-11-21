@@ -113,6 +113,7 @@ export default {
     checkF7Compatibility(app)
     installRouterTransition(Vue, VueRouter, options)
     installDependency(Vue, app, Dom7, options)
+    initialTheme(Vue, app, Dom7, options)
     installRouter(Vue, app, Dom7, options)
     installPatchs(Vue, app, Dom7, options)
     installMixins(Vue, app, Dom7, options)
@@ -133,5 +134,15 @@ function installDependency (Vue, app, $, options) {
 function checkF7Compatibility (app) {
   if (!compatibleVersion.test(app.version)) {
     throw new Error('Current Version Vuf7 only compatible with Framework7 1.(4|5).*.')
+  }
+}
+
+function initialTheme (Vue, app, $, options) {
+  let theme = options.target === 'ios'
+    ? options.iosTheme
+    : options.androidTheme
+
+  if (theme) {
+    $('body').addClass(`theme-${theme}`)
   }
 }

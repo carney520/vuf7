@@ -1,5 +1,5 @@
 <template lang="jade">
-  .popup(:class="popupClasses")
+  .popup(:class="popupClasses", @open="handleOpen")
     slot
 </template>
 
@@ -13,6 +13,12 @@
       }
     },
 
+    data () {
+      return {
+        shown: false
+      }
+    },
+
     computed: {
       popupClasses () {
         return {
@@ -22,6 +28,11 @@
     },
 
     methods: {
+      handleOpen () {
+        if (!this.shown) {
+          this.shown = true
+        }
+      },
       show () {
         this.$popup(this.$el)
         this.$emit('show')

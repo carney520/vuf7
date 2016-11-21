@@ -22,6 +22,7 @@ import { Row, Col } from './components/grid'
 import { Flex, FlexItem } from './components/flexbox'
 import { Popup, Popover, PickerModal } from './components/popup'
 import Preloader from './components/preloader'
+import ProgressBar from './components/progress-bar'
 import Badge from './components/badge'
 import {
   ListBlock,
@@ -50,6 +51,7 @@ import {
   NumberPassword
 } from './components/form'
 import Icon from './components/icon'
+import Rater from './components/rater'
 import {
   Swiper,
   SwiperSlide
@@ -91,7 +93,9 @@ export const components = {
   Popup,
   Popover,
   Preloader,
+  ProgressBar,
   Row,
+  Rater,
   Searchbar,
   Slider,
   Switch,

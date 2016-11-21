@@ -78,4 +78,8 @@
   margin-top: -44px;
   height: calc(100% + 44px);
 }
+
+.tabs-animated-wrap > .tabs > .tab {
+  overflow: auto;
+}
 </style>
