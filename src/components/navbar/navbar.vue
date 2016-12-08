@@ -60,4 +60,7 @@
       }
     }
   }
+  .navbar, .toolbar {
+    transform: translate3s(0, 0, 0);
+  }
 </style>
