@@ -36,12 +36,14 @@
       },
 
       contentblockStyle () {
+        const gutter = this.noGutter
+          ? '0'
+          : this.smallGutter
+          ? '10px'
+          : undefined
         return {
-          'margin-top': this.noGutter
-            ? '0'
-            : this.smallGutter
-            ? '10px'
-            : undefined
+          'margin-top': gutter,
+          'margin-bottom': gutter
         }
       },
 
